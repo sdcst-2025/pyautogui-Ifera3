@@ -10,7 +10,7 @@ buttonList = []
 
 class button():
     def __init__(self,buttonImage):
-        print(buttonImage)
+        #print(buttonImage)
         self.clicks = 0
         self.image = buttonImage
         locationSize = gui.locateOnScreen(self.image,confidence=0.9)
@@ -33,7 +33,7 @@ class button():
 
     def activate(self):
         self.clicks += 1
-        print(self.clicks)
+        #print(self.clicks)
         time.sleep(1)
         gui.moveTo(self.x+(0.5*self.width), self.y+(0.5*self.height))
         gui.leftClick(self.x+(0.5*self.width), self.y+(0.5*self.height))
@@ -53,14 +53,14 @@ class buttonbreed(button):
             else:
                 location = gui.locateOnScreen("images/pond.png",confidence=0.9)
                 plus = gui.locateOnScreen("images/plus.png",region=(location.left,location.top,location.left+location.width,location.top+location.height),confidence=0.98)
-            print(location)
+            #print(location)
             gui.moveTo(plus.left+(0.5*plus.width),plus.top+(0.5*plus.height))
             gui.leftClick(plus.left+(0.5*plus.width),plus.top+(0.5*plus.height))
-        if self.clicks == 2:
-            buttonList.append(button('images/moreFish.png'))
-        elif self.clicks == 3:
-            buttonList.append(button('images/biggerBowl.png'))
-            buttonList.append(button('images/Veteran.png'))
+            if self.clicks == 2:
+                buttonList.append(button('images/moreFish.png'))
+            elif self.clicks == 3:
+                buttonList.append(button('images/biggerBowl.png'))
+                buttonList.append(button('images/Veteran.png'))
 
 def start():
     #time.sleep(10)
