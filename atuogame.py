@@ -14,10 +14,10 @@ class button():
         self.clicks = 0
         self.image = buttonImage
         locationSize = gui.locateOnScreen(self.image,confidence=0.9)
-        self.x = locationSize.left
-        self.y = locationSize.top
-        self.height = locationSize.height
-        self.width = locationSize.width + 65
+        self.x = locationSize.left - 12
+        self.y = locationSize.top - 12
+        self.height = locationSize.height + 15
+        self.width = locationSize.width + 100
         #gui.moveTo(self.x+self.width,self.y+self.height)
     
     def isAvalible(self):
@@ -47,12 +47,12 @@ class buttonbreed(button):
         global buttonList
         if super().isAvalible():
             time.sleep(1)
-            if self.clicks == 2:
+            if self.clicks == 3:
                 location = gui.locateOnScreen("images/towr.png",confidence=0.9)
                 plus = gui.locateOnScreen("images/plus.png",region=(location.left,location.top-100,location.left+location.width,location.top+location.height),confidence=0.9)
             else:
                 location = gui.locateOnScreen("images/pond.png",confidence=0.9)
-                plus = gui.locateOnScreen("images/plus.png",region=(location.left,location.top,location.left+location.width,location.top+location.height),confidence=0.98)
+                plus = gui.locateOnScreen("images/plus.png",region=(location.left,location.top-140,location.left+location.width,location.top+location.height),confidence=0.98)
             #print(location)
             gui.moveTo(plus.left+(0.5*plus.width),plus.top+(0.5*plus.height))
             gui.leftClick(plus.left+(0.5*plus.width),plus.top+(0.5*plus.height))
