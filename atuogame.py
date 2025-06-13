@@ -1,10 +1,12 @@
 #!Python 3
 
+#https://quanran.itch.io/slimeow-game
+
 import time
 import pyautogui as gui
 gui.FAILSAFE = True
 
-notYet = 'images/unavalible.png'
+notYet = 'images/unavalible.png'#'images/zero.png'
 notYet100 = 'images/unwork100.png'
 buttonList = []
 
@@ -14,19 +16,23 @@ class button():
         self.clicks = 0
         self.image = buttonImage
         locationSize = gui.locateOnScreen(self.image,confidence=0.9)
-        self.x = locationSize.left - 12
-        self.y = locationSize.top - 12
-        self.height = locationSize.height + 15
-        self.width = locationSize.width + 100
+        self.x = locationSize.left - 20
+        self.y = locationSize.top - 20
+        self.height = locationSize.height + 50
+        self.width = locationSize.width + 150
+        print(self.x,self.y,self.x+self.width,self.y+self.height)
         #gui.moveTo(self.x+self.width,self.y+self.height)
     
     def isAvalible(self):
         try:
             gui.locateOnScreen(notYet,region=(self.x,self.y,self.x+self.width,self.y+self.height))
+            #print('pass 1',self.image)
             return False
         except: 
             try:
                 gui.locateOnScreen(notYet100,region=(self.x,self.y,self.x+self.width,self.y+self.height))
+                #raise
+                #print('pass 2',self.image)
                 return False
             except:
                 return self.activate()
@@ -57,10 +63,14 @@ class buttonbreed(button):
             gui.moveTo(plus.left+(0.5*plus.width),plus.top+(0.5*plus.height))
             gui.leftClick(plus.left+(0.5*plus.width),plus.top+(0.5*plus.height))
             if self.clicks == 2:
-                buttonList.append(button('images/moreFish.png'))
+                buttonList.insert(0,button('images/moreFish.png'))
             elif self.clicks == 3:
                 buttonList.append(button('images/biggerBowl.png'))
                 buttonList.append(button('images/Veteran.png'))
+            elif self.clicks == 4:
+                buttonList.append(button('images/quickMeow.png'))
+            elif self.clicks == 5:
+                buttonList.insert(1,button('images/fishyResearch.png'))
 
 def start():
     #time.sleep(10)
@@ -88,8 +98,8 @@ def mainloop():
     while gui.FAILSAFE == True:
         for button in buttonList:
             button.isAvalible()
+            gui.failSafeCheck()
         #print(1)
-        gui.failSafeCheck()
 
 start()
 mainloop()
