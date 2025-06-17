@@ -88,18 +88,19 @@ def start():
     gui.leftClick(locatoin.x, locatoin.y)
 
 def mainloop():
+    start()
     time.sleep(0.5)
     buttonList.append(buttonbreed("images/breedSlimeow.png"))
-    #button = gui.locateOnScreen("images/breedSlimeow.png",confidence=0.9)
-    #print(button)
-    #gui.moveTo(button.left, button.top)
-    #time.sleep(0.5)
-    #gui.moveTo(button.left + button.width+65, button.top + button.height)
     while gui.FAILSAFE == True:
         for button in buttonList:
             button.isAvalible()
             gui.failSafeCheck()
         #print(1)
+    #button = gui.locateOnScreen("images/breedSlimeow.png",confidence=0.9)
+    #print(button)
+    #gui.moveTo(button.left, button.top)
+    #time.sleep(0.5)
+    #gui.moveTo(button.left + button.width+65, button.top + button.height)
 
-start()
-mainloop()
+if __name__ == "__main__":
+    mainloop()
